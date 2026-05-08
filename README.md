@@ -1,3 +1,3 @@
-# ssh.ai — public assets
+# ssh.ai
 
-Hosts the privacy policy at `/privacy.html`. See https://github.com/nikitaeight24family/sshai for the source.
+Privacy policy at `/privacy.html`.
