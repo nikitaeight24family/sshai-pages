@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ssh.ai — Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    max-width: 720px;
+    margin: 2em auto;
+    padding: 0 1em;
+  }
+  h1 { font-size: 1.6em; margin-top: 0.2em; }
+  h2 { font-size: 1.15em; margin-top: 1.6em; }
+  table { border-collapse: collapse; width: 100%; margin: 0.6em 0; }
+  th, td { border: 1px solid #8884; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { font-weight: 600; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; }
+  small { color: #888; }
+  a { color: #06c; }
+</style>
+</head>
+<body>
+
+<h1>Privacy Policy — ssh.ai</h1>
+<p><small>Last updated: 2026-05-08 · App: ssh.ai (Android, <code>ai.eight24family.sshai</code>) · Maintainer: Nikita / 8/24 Family · <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a></small></p>
+
+<p>ssh.ai is an Android client that lets you SSH into <strong>your own</strong> servers and drive the Claude Code, Codex, or Gemini CLI tools that live there. Everything in this policy stems from one design rule: we don't want copies of your data and we never run intermediary servers between your phone and your hosts.</p>
+
+<h2>What we do NOT collect</h2>
+<ul>
+  <li><strong>No accounts.</strong> We don't ask you to register.</li>
+  <li><strong>No chat contents.</strong> Prompts and replies travel directly between your phone and <strong>your</strong> SSH server.</li>
+  <li><strong>No SSH credentials.</strong> Passwords, private keys, and FIDO security-key credential handles stay on your device, encrypted at rest with <code>androidx.security.crypto</code> (AES-256, hardware-backed via Android Keystore where available).</li>
+  <li><strong>No advertising IDs.</strong> No GAID, no device fingerprint.</li>
+  <li><strong>No location, contacts, calendar, microphone, or camera.</strong></li>
+</ul>
+
+<h2>What we DO collect (opt-out available)</h2>
+<p>For stability we send anonymous technical data to <strong>Sentry</strong>. Toggle off any time via <strong>Settings → Privacy → Crash reporting</strong>.</p>
+<table>
+  <thead><tr><th>Category</th><th>Data</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Crash logs</td><td>Stack traces, app version, Android OS, device model</td><td>Find and fix bugs</td></tr>
+    <tr><td>Performance traces (20% sampled)</td><td>Numeric durations of SSH handshake, agent bootstrap, chat first paint</td><td>Find and fix slowness</td></tr>
+    <tr><td>Anonymous app interactions</td><td>Which AI CLI you opened (claude/codex/gemini), attachment kind, SSH failure category</td><td>Prioritise feature work</td></tr>
+  </tbody>
+</table>
+<p>Identifiers are stripped before sending: Sentry's installation UUID is removed in <code>beforeSend</code>; IPs are scrubbed at Sentry's edge. Sentry stores this data for 90 days.</p>
+
+<h2>What stays on your device only</h2>
+<ul>
+  <li>All SSH server records, hostnames, usernames.</li>
+  <li>All SSH keys (passwords, PEM private keys, FIDO key handles).</li>
+  <li>All chat messages.</li>
+  <li>Locally-cached copies of your AI session JSONL files.</li>
+</ul>
+
+<h2>Data on your servers</h2>
+<p>Anything stored on the servers you connect to is governed by <strong>your</strong> server, <strong>your</strong> AI account, and the agent's policy (Anthropic for Claude, OpenAI for Codex, Google for Gemini). ssh.ai doesn't read or proxy that traffic — it's just a terminal in your pocket.</p>
+
+<h2>Third-party services</h2>
+<ul>
+  <li><a href="https://sentry.io/privacy/">Sentry</a> — crash and performance reporting. The in-app toggle stops all SDK calls.</li>
+  <li>Anthropic / OpenAI / Google — only via the CLI tool you choose to run on <strong>your</strong> server, with <strong>your</strong> credentials. We are not a party to that traffic.</li>
+</ul>
+<p>We do <strong>not</strong> use Google Analytics, Firebase Analytics, Crashlytics, AppsFlyer, Adjust, Branch, or any advertising/attribution SDK.</p>
+
+<h2>Hardware security keys (FIDO / CTAP2)</h2>
+<p>If you import a hardware security key (YubiKey, Nitrokey, etc.) for SSH authentication, the app uses Android NFC and USB-host APIs to talk to the key over CTAP2. The credential handle is stored encrypted on the device. <strong>We do not collect biometric data.</strong> A "touch" is the physical-presence check the FIDO standard requires — a cryptographic signature, not an image or fingerprint template.</p>
+
+<h2>Children</h2>
+<p>ssh.ai is designed for software developers and is not directed at children under 13. We do not knowingly collect data from children.</p>
+
+<h2>Data deletion</h2>
+<p><strong>Settings → Privacy → Delete all my data</strong> removes the encrypted server registry, all stored keys, all session caches, all preferences, and the Android Keystore master key, then terminates the app process so the OS clears any in-memory state.</p>
+<p>To request deletion of anonymous telemetry from Sentry (within their 90-day retention window), email <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a>.</p>
+
+<h2>International transfers</h2>
+<p>Sentry processes data in the EU and the US. By keeping the crash-reporting toggle on, you consent to this transfer.</p>
+
+<h2>Changes to this policy</h2>
+<p>If we change what the app collects, we'll update this page and bump the <em>Last updated</em> date. Material changes will also be surfaced in-app on first launch after update.</p>
+
+<h2>Contact</h2>
+<p>Questions, deletion requests, or compliance inquiries: <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a></p>
+
+</body>
+</html>
