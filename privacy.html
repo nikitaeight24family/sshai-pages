@@ -25,7 +25,7 @@
 <body>
 
 <h1>Privacy Policy — ssh.ai</h1>
-<p><small>Last updated: 2026-05-08 · App: ssh.ai (Android, <code>ai.eight24family.sshai</code>) · Maintainer: Nikita / 8/24 Family · <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a></small></p>
+<p><small>Last updated: 2026-05-11 · App: ssh.ai (Android, <code>ai.eight24family.sshai</code>), version 1.0.x · Distributor / maintainer: Eight 24 Family LLC · <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a></small></p>
 
 <p>ssh.ai is an Android client that lets you SSH into <strong>your own</strong> servers and drive the Claude Code, Codex, or Gemini CLI tools that live there. Everything in this policy stems from one design rule: we don't want copies of your data and we never run intermediary servers between your phone and your hosts.</p>
 
@@ -45,10 +45,11 @@
   <tbody>
     <tr><td>Crash logs</td><td>Stack traces, app version, Android OS, device model</td><td>Find and fix bugs</td></tr>
     <tr><td>Performance traces (20% sampled)</td><td>Numeric durations of SSH handshake, agent bootstrap, chat first paint</td><td>Find and fix slowness</td></tr>
-    <tr><td>Anonymous app interactions</td><td>Which AI CLI you opened (claude/codex/gemini), attachment kind, SSH failure category</td><td>Prioritise feature work</td></tr>
+    <tr><td>Anonymous app interactions</td><td>Which AI CLI you opened (claude/codex/gemini), attachment kind (file/photo/diff/init-prompt), whether you created/edited/deleted a subagent, whether your approval mode changed and to what, SSH failure category</td><td>Prioritise feature work</td></tr>
   </tbody>
 </table>
-<p>Identifiers are stripped before sending: Sentry's installation UUID is removed in <code>beforeSend</code>; IPs are scrubbed at Sentry's edge. Sentry stores this data for 90 days.</p>
+<p>Identifiers are stripped before sending: Sentry's installation UUID is dropped in <code>beforeSend</code> (see <code>SshAiApp.initSentryIfEnabled</code>); IPs are scrubbed at Sentry's project-level PII config. Sentry stores this data for 90 days.</p>
+<p><strong>Country / city geo derived from IP.</strong> Sentry resolves an approximate geographic region (country and city level — not GPS) from the source IP at ingestion time and stores that, then drops the IP itself. This is the only piece of geolocation Sentry holds. It cannot be turned off independently of crash reporting — opt out of crash reporting if you don't want it.</p>
 
 <h2>What stays on your device only</h2>
 <ul>
@@ -69,14 +70,26 @@
 <p>We do <strong>not</strong> use Google Analytics, Firebase Analytics, Crashlytics, AppsFlyer, Adjust, Branch, or any advertising/attribution SDK.</p>
 
 <h2>Hardware security keys (FIDO / CTAP2)</h2>
-<p>If you import a hardware security key (YubiKey, Nitrokey, etc.) for SSH authentication, the app uses Android NFC and USB-host APIs to talk to the key over CTAP2. The credential handle is stored encrypted on the device. <strong>We do not collect biometric data.</strong> A "touch" is the physical-presence check the FIDO standard requires — a cryptographic signature, not an image or fingerprint template.</p>
+<p>If you import a hardware security key for SSH authentication, the app uses Android NFC and USB-host APIs to talk to the key over CTAP2. The credential handle is stored encrypted on the device. <strong>We do not collect biometric data.</strong> A "touch" is the physical-presence check the FIDO standard requires — a cryptographic signature, not an image or fingerprint template.</p>
+
+<h2>Permissions the app requests</h2>
+<ul>
+  <li><strong>Internet</strong> — to reach the SSH servers you add and (if crash reporting is on) Sentry.</li>
+  <li><strong>Foreground service + persistent notification</strong> — to keep agent sessions alive while the screen is locked or the app is backgrounded.</li>
+  <li><strong>Notifications</strong> — to show approval prompts and connection status.</li>
+  <li><strong>NFC / USB host</strong> — only when you tap to use a hardware security key.</li>
+</ul>
+<p>We do <strong>not</strong> request location, contacts, calendar, microphone, camera, SMS, or call-log permissions, and the app does not declare any of them.</p>
 
 <h2>Children</h2>
 <p>ssh.ai is designed for software developers and is not directed at children under 13. We do not knowingly collect data from children.</p>
 
-<h2>Data deletion</h2>
-<p><strong>Settings → Privacy → Delete all my data</strong> removes the encrypted server registry, all stored keys, all session caches, all preferences, and the Android Keystore master key, then terminates the app process so the OS clears any in-memory state.</p>
-<p>To request deletion of anonymous telemetry from Sentry (within their 90-day retention window), email <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a>.</p>
+<h2>Your rights / data deletion</h2>
+<ul>
+  <li><strong>Right to opt out (crash reporting + geo derivation):</strong> <strong>Settings → Privacy → Crash reporting</strong> off. Takes effect on the next app launch.</li>
+  <li><strong>Right to erasure (GDPR Art. 17):</strong> <strong>Settings → Privacy → Delete all my data</strong>. Removes the encrypted server registry, all stored keys (including hardware-key credential handles), all session caches, the on-device upload cache, all preferences, and the Android Keystore master key, then terminates the app process. To remove anonymous telemetry already received by Sentry (within their 90-day retention window), email <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a>.</li>
+  <li><strong>Right of access (GDPR Art. 15):</strong> email below. With the PII strippings in place, we typically have nothing user-identifying to return.</li>
+</ul>
 
 <h2>International transfers</h2>
 <p>Sentry processes data in the EU and the US. By keeping the crash-reporting toggle on, you consent to this transfer.</p>
@@ -85,7 +98,7 @@
 <p>If we change what the app collects, we'll update this page and bump the <em>Last updated</em> date. Material changes will also be surfaced in-app on first launch after update.</p>
 
 <h2>Contact</h2>
-<p>Questions, deletion requests, or compliance inquiries: <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a></p>
+<p>Questions, opt-out requests, deletion requests, or compliance inquiries: <strong>Eight 24 Family LLC</strong> · <a href="mailto:nikita@eight24family.ai">nikita@eight24family.ai</a></p>
 
 </body>
 </html>
